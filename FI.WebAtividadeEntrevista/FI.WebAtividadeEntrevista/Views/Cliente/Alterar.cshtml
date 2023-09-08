@@ -1,0 +1,23 @@
+﻿@model WebAtividadeEntrevista.DTO.ClienteDTO
+@{
+    ViewBag.Title = "Alterar Cliente";
+}
+@section scripts{
+    <script>
+        var urlPost = '@Url.Action("Alterar", "Cliente", new { area = "" })';
+        var obj = @Html.Raw(Json.Encode(Model.Cliente));
+        var urlRetorno = '@Url.Action("Index", "Cliente", new { area = "" })';
+        var urlIncluirBeneficiario = '@Url.Action("IncluirBeneficiario", "Cliente")';
+        var clienteId = @Html.Raw(Model.Cliente.Id);
+    </script>
+    @Scripts.Render("~/bundles/altClientes")
+
+    <script>
+        $(document).ready(function () {
+            const beneficiarios = @Html.Raw(Json.Encode(Model.Beneficiarios));
+            gridBeneficiario.incializaTabela(beneficiarios)
+        })
+    </script>
+}
+<h2>@Html.Raw(ViewBag.Title)</h2>
+@Html.Partial("Forms")
